@@ -1,0 +1,627 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    
+    <script src='http://d3js.org/d3.v3.min.js' type='text/javascript'></script>
+    <script src='http://d3js.org/topojson.v1.min.js' type='text/javascript'></script>
+    <script src='http://datamaps.github.io/scripts/datamaps.all.min.js' type='text/javascript'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0/handlebars.min.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 800px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body>
+    <div id='chart377dd643533' class='rChart datamaps'></div>  
+    
+    <script id='popup-template' type='text/x-handlebars-template'>
+    
+</script>
+<script>
+  var chartParams = {
+ "dom": "chart377dd643533",
+"width":    800,
+"height":    400,
+"scope": "usa",
+"fills": {
+ "5": "#F1EEF6",
+"1": "#D7B5D8",
+"4": "#DF65B0",
+"3": "#DD1C77",
+"2": "#980043" 
+},
+"data": {
+ "AK": {
+ "State": "Alaska",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.11,
+"Adult_Obesity_Rate":  0.624,
+"state": "AK",
+"fillKey": 5 
+},
+"AL": {
+ "State": "Alabama",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.17,
+"Adult_Obesity_Rate":  0.623,
+"state": "AL",
+"fillKey": 5 
+},
+"AR": {
+ "State": "Arkansas",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " Yes ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.16,
+"Adult_Obesity_Rate":  0.619,
+"state": "AR",
+"fillKey": 4 
+},
+"AZ": {
+ "State": "Arizona",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.12,
+"Adult_Obesity_Rate":  0.535,
+"state": "AZ",
+"fillKey": 1 
+},
+"CA": {
+ "State": "California",
+"Approach_to_Address_Childhood_Obesity": " School nutrition program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.13,
+"Adult_Obesity_Rate":  0.579,
+"state": "CA",
+"fillKey": 3 
+},
+"CO": {
+ "State": "Colorado",
+"Approach_to_Address_Childhood_Obesity": " School nutrition program ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":    0.1,
+"Adult_Obesity_Rate":  0.523,
+"state": "CO",
+"fillKey": 1 
+},
+"CT": {
+ "State": "Connecticut",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.12,
+"Adult_Obesity_Rate":  0.552,
+"state": "CT",
+"fillKey": 2 
+},
+"DE": {
+ "State": "Delaware",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.15,
+"Adult_Obesity_Rate":  0.605,
+"state": "DE",
+"fillKey": 4 
+},
+"FL": {
+ "State": "Florida",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " Yes ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":  0.582,
+"state": "FL",
+"fillKey": 3 
+},
+"GA": {
+ "State": "Georgia",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " Yes ",
+"Childhood_Obesity_Rate":   0.16,
+"Adult_Obesity_Rate":  0.605,
+"state": "GA",
+"fillKey": 4 
+},
+"HI": {
+ "State": "Hawaii",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.13,
+"Adult_Obesity_Rate":  0.514,
+"state": "HI",
+"fillKey": 1 
+},
+"IA": {
+ "State": "Iowa",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.13,
+"Adult_Obesity_Rate":  0.602,
+"state": "IA",
+"fillKey": 4 
+},
+"ID": {
+ "State": "Idaho",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":    0.1,
+"Adult_Obesity_Rate":  0.583,
+"state": "ID",
+"fillKey": 3 
+},
+"IL": {
+ "State": "Illinois",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " Yes ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.16,
+"Adult_Obesity_Rate":  0.582,
+"state": "IL",
+"fillKey": 3 
+},
+"IN": {
+ "State": "Indiana",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " Yes ",
+"Childhood_Obesity_Rate":   0.16,
+"Adult_Obesity_Rate":  0.595,
+"state": "IN",
+"fillKey": 3 
+},
+"KS": {
+ "State": "Kansas",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":   0.58,
+"state": "KS",
+"fillKey": 3 
+},
+"KY": {
+ "State": "Kentucky",
+"Approach_to_Address_Childhood_Obesity": " School nutrition program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.21,
+"Adult_Obesity_Rate":  0.625,
+"state": "KY",
+"fillKey": 5 
+},
+"LA": {
+ "State": "Louisiana",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.17,
+"Adult_Obesity_Rate":  0.623,
+"state": "LA",
+"fillKey": 5 
+},
+"MA": {
+ "State": "Massachusetts",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":  0.529,
+"state": "MA",
+"fillKey": 1 
+},
+"MD": {
+ "State": "Maryland",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " Yes ",
+"Childhood_Obesity_Rate":   0.13,
+"Adult_Obesity_Rate":  0.582,
+"state": "MD",
+"fillKey": 3 
+},
+"ME": {
+ "State": "Maine",
+"Approach_to_Address_Childhood_Obesity": " School nutrition program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.13,
+"Adult_Obesity_Rate":  0.569,
+"state": "ME",
+"fillKey": 3 
+},
+"MI": {
+ "State": "Michigan",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":  0.605,
+"state": "MI",
+"fillKey": 4 
+},
+"MN": {
+ "State": "Minnesota",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":    0.1,
+"Adult_Obesity_Rate":  0.594,
+"state": "MN",
+"fillKey": 3 
+},
+"MO": {
+ "State": "Missouri",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " Yes ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.16,
+"Adult_Obesity_Rate":  0.624,
+"state": "MO",
+"fillKey": 5 
+},
+"MS": {
+ "State": "Mississippi",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.18,
+"Adult_Obesity_Rate":  0.649,
+"state": "MS",
+"fillKey": 5 
+},
+"MT": {
+ "State": "Montana",
+"Approach_to_Address_Childhood_Obesity": " Physical education program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.11,
+"Adult_Obesity_Rate":  0.547,
+"state": "MT",
+"fillKey": 2 
+},
+"NC": {
+ "State": "North Carolina",
+"Approach_to_Address_Childhood_Obesity": " School nutrition program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.19,
+"Adult_Obesity_Rate":  0.594,
+"state": "NC",
+"fillKey": 3 
+},
+"ND": {
+ "State": "North Dakota",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.12,
+"Adult_Obesity_Rate":   0.62,
+"state": "ND",
+"fillKey": 4 
+},
+"NE": {
+ "State": "Nebraska",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.12,
+"Adult_Obesity_Rate":  0.602,
+"state": "NE",
+"fillKey": 4 
+},
+"NH": {
+ "State": "New Hampshire",
+"Approach_to_Address_Childhood_Obesity": " Physical education program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.13,
+"Adult_Obesity_Rate":  0.574,
+"state": "NH",
+"fillKey": 3 
+},
+"NJ": {
+ "State": "New Jersey",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":  0.553,
+"state": "NJ",
+"fillKey": 2 
+},
+"NM": {
+ "State": "New Mexico",
+"Approach_to_Address_Childhood_Obesity": " School nutrition program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.17,
+"Adult_Obesity_Rate":  0.582,
+"state": "NM",
+"fillKey": 3 
+},
+"NV": {
+ "State": "Nevada",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.12,
+"Adult_Obesity_Rate":  0.562,
+"state": "NV",
+"fillKey": 2 
+},
+"NY": {
+ "State": "New York",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.15,
+"Adult_Obesity_Rate":  0.568,
+"state": "NY",
+"fillKey": 3 
+},
+"OH": {
+ "State": "Ohio",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":  0.603,
+"state": "OH",
+"fillKey": 4 
+},
+"OK": {
+ "State": "Oklahoma",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.15,
+"Adult_Obesity_Rate":  0.606,
+"state": "OK",
+"fillKey": 4 
+},
+"OR": {
+ "State": "Oregon",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":  0.565,
+"state": "OR",
+"fillKey": 2 
+},
+"PA": {
+ "State": "Pennsylvania",
+"Approach_to_Address_Childhood_Obesity": " School nutrition program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " Yes ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.13,
+"Adult_Obesity_Rate":  0.592,
+"state": "PA",
+"fillKey": 3 
+},
+"RI": {
+ "State": "Rhode Island",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.12,
+"Adult_Obesity_Rate":  0.558,
+"state": "RI",
+"fillKey": 2 
+},
+"SC": {
+ "State": "South Carolina",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.19,
+"Adult_Obesity_Rate":  0.623,
+"state": "SC",
+"fillKey": 5 
+},
+"SD": {
+ "State": "South Dakota",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.12,
+"Adult_Obesity_Rate":  0.607,
+"state": "SD",
+"fillKey": 4 
+},
+"TN": {
+ "State": "Tennessee",
+"Approach_to_Address_Childhood_Obesity": " School nutrition program ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " Yes ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":    0.2,
+"Adult_Obesity_Rate":  0.593,
+"state": "TN",
+"fillKey": 3 
+},
+"TX": {
+ "State": "Texas",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.19,
+"Adult_Obesity_Rate":  0.588,
+"state": "TX",
+"fillKey": 3 
+},
+"UT": {
+ "State": "Utah",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.11,
+"Adult_Obesity_Rate":  0.543,
+"state": "UT",
+"fillKey": 2 
+},
+"VA": {
+ "State": "Virginia",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " Yes ",
+"Childhood_Obesity_Rate":   0.11,
+"Adult_Obesity_Rate":  0.589,
+"state": "VA",
+"fillKey": 3 
+},
+"VT": {
+ "State": "Vermont",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":  0.542,
+"state": "VT",
+"fillKey": 2 
+},
+"WA": {
+ "State": "Washington",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.21,
+"Adult_Obesity_Rate":  0.565,
+"state": "WA",
+"fillKey": 2 
+},
+"WI": {
+ "State": "Wisconsin",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.09,
+"Adult_Obesity_Rate":  0.591,
+"state": "WI",
+"fillKey": 3 
+},
+"WV": {
+ "State": "West Virginia",
+"Approach_to_Address_Childhood_Obesity": " Both ",
+"State_Task_Force_Committee": " Yes ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.14,
+"Adult_Obesity_Rate":  0.636,
+"state": "WV",
+"fillKey": 5 
+},
+"WY": {
+ "State": "Wyoming",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " Yes ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.15,
+"Adult_Obesity_Rate":  0.596,
+"state": "WY",
+"fillKey": 4 
+},
+"NA": {
+ "State": "District of Columbia",
+"Approach_to_Address_Childhood_Obesity": " None ",
+"State_Task_Force_Committee": " No ",
+"Mandates_BMI_Screening": " No ",
+"Mandates_Obesity_Treatment_Coverage": " No ",
+"Childhood_Obesity_Rate":   0.23,
+"Adult_Obesity_Rate":  0.521,
+"state": null,
+"fillKey": 1 
+} 
+},
+"id": "chart377dd643533" 
+}
+  chartParams.element = document.getElementById('chart377dd643533')
+  
+  
+  var mapchart377dd643533 = new Datamap(chartParams);
+  
+  
+    
+  // draw a bubble map if specified
+  if (chartParams.bubbles) {
+    var bubbles = chartParams.bubbles
+    mapchart377dd643533.bubbles(bubbles.data, bubbles.config)
+  }
+</script>
+
+<style>
+.datamaps {
+  position: relative;
+}
+</style>
+    
+  </body>
+</html>

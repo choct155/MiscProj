@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.5/leaflet.css" />
+   <script src="http://cdn.leafletjs.com/leaflet-0.5/leaflet.js"></script>
+   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+   <script src="http://d3js.org/queue.v1.min.js"></script>
+   <script src="leaflet-dvf.markers.min.js"></script>
+   
+   
+   
+<style>
+
+.legend {
+    padding: 0px 0px;
+    font: 10px sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.key path {
+  display: none;
+}
+
+</style>
+</head>
+<body>
+
+        <div id="map" style="width: 960px; height: 500px"></div>
+
+<script>
+
+queue()
+    .defer(d3.json, '/home/choct155/dissertation/MiscProj/asmnt_neigh_ll2.json')
+    .await(makeMap)
+
+function makeMap(error, gjson_1) {
+
+    
+
+    
+
+    function matchKey(datapoint, key_variable){
+        return(parseFloat(key_variable[0][datapoint]));
+    };
+
+    
+
+    var map = L.map('map').setView([38.9072309, -77.0364641], 10);
+
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: 'Map data (c) <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    
+    var polygon_1 = new L.RegularPolygonMarker(new L.LatLng(38.9906738598, -77.0356483358), {
+    color: 'black',
+    opacity: 1,
+    weight: 2,
+    fillColor: '#B80000',
+    fillOpacity: 1,
+    numberOfSides: 4,
+    rotation: 0,
+    radius: 6
+});
+polygon_1._latlng = polygon_1._centerLatLng
+    polygon_1.bindPopup("Test");
+    map.addLayer(polygon_1)
+    
+
+    
+
+    
+
+    
+    function style_1(feature) {
+    return {
+        fillColor: 'blue',
+        weight: 1,
+        opacity: 1,
+        color: 'black',
+        fillOpacity: 0.6
+    };
+}
+    
+
+    
+    gJson_layer_1 = L.geoJson(gjson_1, {style: style_1}).addTo(map)
+    
+
+    
+
+};
+
+</script>
+
+</body>

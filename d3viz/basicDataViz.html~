@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>D3 Tutorial</title>
+	<script src='http://d3js.org/d3.v3.min.js'></script>
+</head>
+
+<body>
+
+	<script>
+		//Create data array
+		var dataArray = [20,40,50];
+
+		//Create color array
+		var colArray = ['red','blue','green'];
+
+		//Create SVG canvas and set scope
+		var canvas = d3.select('body')
+				.append('svg')
+				.attr('width',500)
+				.attr('height',500);
+
+		//Create bars (selectAll with no existing rects creates empty array)
+		var bars = canvas.selectAll('rect')
+				//Bind data to empty rectangle array				
+				.data(dataArray)
+				//Return placeholders for missing rectangles (if an extra datum exists)
+				.enter()
+					//Append rectangle for each data element
+					.append('rect')
+					.attr('width', function(d) {return d*10;})
+					.attr('height', 50)
+					.attr('y',function(d,i) {return i*100;})
+					.attr('fill',function(
+				
+		
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<style>
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+</style>
+
+
+<html>
+
+<head>
+	<title>div Bar Chart</title>
+	<div class="chart"></div>
+	<script src='http://d3js.org/d3.v3.min.js' charset="utf-8"></script>
+</head>
+
+<body>
+
+	<script>
+
+	    //Create data array
+	    var data = [4,8,15,16,23,42];
+
+	    //Create a linear scale that takes canvas space as the input parameter set
+	    var x = d3.scale.linear()
+	      //Scales map from a domain space...
+	      .domain([0,d3.max(data)])
+	      //...to a display space
+	      .range([0,420]);
+
+			//Select chart container
+	    d3.select('.chart')
+	      //Create an empty array of child divs (bars)...
+	      //(in other words, initiate data join)
+	      .selectAll('div')
+		//...to hold our data (actually join the data)...
+		.data(data)
+	      //...populate the array with divs to represent our data...
+	      .enter().append('div')
+		//...set the bar lengths...
+		.style('width',function(d) {return x(d) + 'px'})
+		//...and add labels
+	    .text(function(d) {return d});
+				
+		
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>D3 Tutorial</title>
+	<script src='http://d3js.org/d3.v3.min.js'></script>
+</head>
+
+<body>
+
+	<script>
+	
+
+		//Create dimension variables
+		var 	width=1760,
+				height=1700;
+
+		//Generate canvas
+		var canvas = d3.select('body')
+							.append('svg')
+							.attr('width',width)
+							.attr('height',height)
+
+		//Load data and creat callback function
+		d3.json('us_states_5m.json',function(data){
+			
+			//Capture features in group objects
+			var group = canvas.selectAll('g')
+								.data(data.features)
+								.enter()
+								.append('g')
+
+			//Choose projection (https://github.com/mbostock/d3/wiki/Geo-Projections)
+			var projection = d3.geo.mercator()
+									//Make the map larger
+									.scale(750)
+									//Move the map
+									.translate([2400,1300]);
+
+			//Create path generator
+			var path = d3.geo.path()
+							//Pass in projection
+							.projection(projection);
+
+			//Couple path with each group object
+			var areas = group.append('path')
+								.attr('d',path)
+								.attr('class','area')
+								.attr('fill','steelblue');
+
+			//Add labels
+			group.append('text')
+				.attr('x',function(d) {return path.centroid(d)[0]})
+				.attr('y',function(d) {return path.centroid(d)[1]})
+				.attr('fill','white')
+				.attr('text-anchor','middle')
+				.attr('font-size',5)
+				.text(function(d) {return d.properties.NAME});
+
+		})
+
+
+	</script>
+
+</body>
+
+</html>

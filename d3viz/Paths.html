@@ -1,0 +1,52 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>D3 Tutorial</title>
+	<script src='http://d3js.org/d3.v3.min.js'></script>
+</head>
+
+<body>
+
+	<script>
+	
+		//Generate canvas
+		var canvas = d3.select('body')
+				.append('svg')
+				.attr('width',500)
+				.attr('height',500);
+
+		//Create data array
+		var data = [	{x:10,y:20},
+				{x:40,y:60},
+				{x:50,y:70}
+				];
+	
+		//Create a group element
+		var group = canvas.append('g')
+				.attr('transform','translate(100,100)');
+
+		//Create line path generator (converts set of coordinates to a line)
+		var line = d3.svg.line()
+				.x(function(d) {return d.x;})
+				.y(function(d) {return d.y;});
+
+		//Bind data to path
+		group.selectAll('path')
+			//Create single line from all points (pass data as array)
+			.data([data])
+			.enter()
+				.append('path')
+				//Actual definition of the path resides in the 'd' attribute of a path object (we can leverage the line generator instead of actually writing it out)
+				.attr('d',line)
+				.attr('fill','none')
+				.attr('stroke','#000fff')
+				.attr('stroke-width',10);
+				
+		
+	</script>
+
+</body>
+
+</html>

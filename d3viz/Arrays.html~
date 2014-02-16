@@ -1,0 +1,25 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>D3 Tutorial</title>
+	<script src='http://d3js.org/d3.v3.min.js'></script>
+</head>
+
+<body>
+
+	<script>
+	
+
+	//Define data array
+	var data = [10,20,30,40,50];
+
+	
+				
+		
+	</script>
+
+</body>
+
+</html>

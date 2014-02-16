@@ -1,0 +1,69 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>D3 Tutorial</title>
+	<script src='http://d3js.org/d3.v3.min.js'></script>
+</head>
+
+<body>
+
+	<script>
+		//Create data array
+		var dataArray = [20,40,50,60];
+
+		//Define plot width and height
+		var width=500;
+		var height=500;
+
+		//Generate scale to set bar width
+		var widthScale = d3.scale.linear()
+					.domain([0,60])
+					.range([0,width])
+
+		//Define color scale
+		var color = d3.scale.linear()
+					.domain([0,60])
+					.range(['red','blue'])
+
+		//Create axis object
+		var axis = d3.svg.axis()
+				.scale(widthScale);
+
+		//Create SVG canvas and set scope
+		var canvas = d3.select('body')
+				.append('svg')
+				.attr('width',width)
+				.attr('height',height)
+				//Add group element (we can now apply transforms to all elements in the canvas				
+				.append('g')
+				//move the entire plot
+				.attr('transform','translate(20,0)')
+				
+
+		//Create bars (selectAll with no existing rects creates empty array)
+		var bars = canvas.selectAll('rect')
+				//Bind data to empty rectangle array				
+				.data(dataArray)
+				//Return placeholders for missing rectangles (if an extra datum exists)
+				.enter()
+					//Append rectangle for each data element
+					.append('rect')
+					.attr('width', function(d) {return widthScale(d);})
+					.attr('height', 50)
+					.attr('fill', function(d) {return color(d);})
+					.attr('y',function(d,i) {return i*100;});
+
+		//Append axis group
+		canvas.append('g')
+			.attr('transform','translate(0,400)')
+			//Call axis object
+			.call(axis);
+				
+		
+	</script>
+
+</body>
+
+</html>

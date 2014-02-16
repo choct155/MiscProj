@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html>
+
+<head>
+	<title>D3 Tutorial</title>
+	<script src='http://d3js.org/d3.v3.min.js'></script>
+</head>
+
+<body>
+
+	<script>
+	
+		//Define data
+		var data = [10,50,80];
+
+		//Define radius of pie chart		
+		var r = 300;
+
+		//Define color scale
+		var color = d3.scale.ordinal()
+				.range(['red','blue','green']);
+
+		//Generate canvas
+		var canvas = d3.select('body')
+				.append('svg')
+				.attr('width',1500)
+				.attr('height',1500);
+
+		//Create a group for arcs and shift the position
+		var group = canvas.append('g')
+				.attr('transform','translate(300,300)');
+
+		//Create arc generator (start and end angles provided by Pie layout
+		var arc = d3.svg.arc()
+				.innerRadius(200)
+				.outerRadius(r);
+
+		//Pie layout takes all the data and returns an object with a start angle, end angle, and value property for each data element
+		var pie = d3.layout.pie()
+				.value(function(d) {return d;});
+
+		//Bind data to document
+		var arcs = group.selectAll('.arc')
+				//Must allow pie layout to process data before binding
+				.data(pie(data))
+				.enter()
+					.append('g')
+					.attr('class','arc');
+
+		//Still need to append a path to objects returned by pie layout (so we can see them)
+		arcs.append('path')
+			.attr('d', arc)
+			.attr('fill',function(d) {return color(d.data);});
+
+		//Add some data labels
+		arcs.append('text')
+			//First, place the labels in the center of each arc
+			.attr('transform',function(d) {return 'translate('+arc.centroid(d)+')';})
+			.attr('text-anchor','middle')
+			.attr('font-size','1.5em')
+			.text(function(d) {return d.data;})
+			.attr('fill','white');
+	
+		
+
+				
+		
+	</script>
+
+</body>
+
+</html>

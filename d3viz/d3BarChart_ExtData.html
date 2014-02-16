@@ -26,7 +26,9 @@ var x = d3.scale.linear()
 var chart = d3.select(".chart")
     .attr("width", width);
 
-d3.tsv("/home/choct155/dissertation/d3viz/d3TabData.tsv", type, function(error, data) {
+//All aspects determined by the data (data domain, plotting scope, number and width of bars, bar positioning, text labels and positioning) is all now housed within the function that reads and processes the data
+d3.tsv("d3TabData.tsv", type, function(error, data) {
+  //Note that the variable (value) must be referenced now
   x.domain([0, d3.max(data, function(d) { return d.value; })]);
 
   chart.attr("height", barHeight * data.length);
@@ -47,6 +49,7 @@ d3.tsv("/home/choct155/dissertation/d3viz/d3TabData.tsv", type, function(error, 
       .text(function(d) { return d.value; });
 });
 
+//Type function tells d3.tsv that value is a number (serves as a parametric input)
 function type(d) {
   d.value = +d.value; // coerce to number
   return d;

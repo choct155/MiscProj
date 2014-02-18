@@ -23,8 +23,8 @@
 							.attr('height',height)
 
 		//Load data and creat callback function
-		d3.json('us_states_5m.json',function(data){
-			
+		d3.json('./us_states_5m.json',function(data){
+			console.log(data)
 			//Capture features in group objects
 			var group = canvas.selectAll('g')
 								.data(data.features)

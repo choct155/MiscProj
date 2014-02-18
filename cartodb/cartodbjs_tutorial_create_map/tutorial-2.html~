@@ -1,0 +1,89 @@
+<html>
+<head>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+  <![endif]-->
+  <style>
+    html, body {width:100%; height:100%; padding: 0; margin: 0;}
+    #cartodb-map { width: 100%; height:100%; background: black;}
+  </style>
+
+	<script type="infowindow/html" id="infowindow_template">
+	  <div class="cartodb-popup">
+		 <a href="#close" class="cartodb-popup-close-button close">x</a>
+		  <div class="cartodb-popup-content-wrapper">
+		    <div class="cartodb-popup-header">
+		      <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light-5ef5e4ff558f4f8d178ab2c8faa231c1.png"></src>
+		    </div>
+		    <div class="cartodb-popup-content">
+		      <!-- content.data contains the field info -->
+		      <h4>City: </h4>
+		      <p>{{content.data.name}}</p>
+		    </div>
+		  </div>
+		  <div class="cartodb-popup-tip-container"></div>
+	  </div>
+	</script>
+
+  <script>
+    var map;
+    function init(){
+      // initiate leaflet map
+      map = new L.Map('cartodb-map', { 
+        center: [40,-70],
+        zoom: 4
+      })
+
+		//Add basemap
+		L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+  					attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms & Feedback</a>'
+			}).addTo(map);
+
+
+		//Add Viz (data) layer
+		var layerURL = 'http://choct155.cartodb.com/api/v2/viz/ac383c20-97f1-11e3-8fd7-0e49973114de/viz.json';
+
+		//Set layer options
+		var subLayerOptions = {
+			//Subset to US (we access the table directly for this query)
+			sql: "SELECT * FROM ne_10m_populated_places_simple where adm0_a3 = 'USA'",
+			//Define CSS properties
+			cartocss: "#ne_10m_populated_places_simple{marker-fill:#109DCD; marker-width:5; marker-line-color:white; marker-line-width: 0;}"
+		};
+
+		//Load the layer onto the map
+		cartodb.createLayer(map,layerURL,{
+				interactivity: 'the_geom'
+			})
+			.addTo(map)
+			//If it works
+			.on('done',function(layer){
+				//Formally define sublayer in layer list
+				var sublayer=layer.getSubLayer(0)
+
+				//Pass the infowindow HTML template to the sublayer
+				sublayer.infowindow.set('template',$('#infowindow_template').html());				
+
+				//With a SQL call defined, we need to run the operation on the layer here (looks like a zero index and layers are held in a list)
+				layer.getSubLayer(0).set(subLayerOptions);
+
+				//Create mouse click event
+				sublayer.on('featureClick',function(e,pos,latlng,data){
+					console.log(data)
+					alert("You interacted with the map!"+data.cartodb_id);
+					});
+				})
+			//If it doesn't, inspect the object
+			.on('error',function(){
+					console.log(cartodb);
+				});
+	
+		}
+  </script>
+</head>
+<body onload="init()">
+  <div id='cartodb-map'></div>
+</body>
+</html>

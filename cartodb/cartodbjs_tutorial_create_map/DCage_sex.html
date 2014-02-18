@@ -1,0 +1,112 @@
+<html>
+<head>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+  <![endif]-->
+  <style>
+    html, body {width:100%; height:100%; padding: 0; margin: 0;}
+    #cartodb-map { width: 100%; height:100%; background: black;}
+  </style>
+
+  <script>
+    var map;
+
+
+    function init(){
+      // initiate leaflet map
+      map = new L.Map('cartodb-map', { 
+        center: [38.88,-77],
+        zoom: 12
+      })
+
+		//Add basemap
+		L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+  					attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms & Feedback</a>'
+			}).addTo(map);
+
+		//Add Viz (data) layer
+		var layerURL = 'http://choct155.cartodb.com/api/v2/viz/c46ade7e-980a-11e3-98b0-0e625a1c94a6/viz.json';
+
+		//Set layer options
+		var subLayerOptions = {
+			//Define CSS properties
+			//cartocss: "#ne_10m_populated_places_simple{marker-fill:#109DCD; marker-width:5; marker-line-color:white; marker-line-width: 0;}"
+		};
+
+		//Load the layer onto the map
+		cartodb.createLayer(map,layerURL, {
+			// To make more simplified hover polygons (faster load time), decrease the .01
+         sql: 'select  *, ST_AsGeoJSON(ST_Simplify(the_geom,.01)) as geometry from {{table_name}}',
+         //sql: 'SELECT * FROM dcdem_by_area',
+			//Columns involved in the hovers must be identified
+			interactivity: 'cartodb_id, geometry, labels'
+			})
+			.addTo(map)
+			//If it works
+			.on('done',function(layer){
+				//With a SQL call defined, we need to run the operation on the layer here (looks like a zero index and layers are held in a list)
+				//layer.getSubLayer(0).set(subLayerOptions);
+				map.addLayer(layer);
+
+				$.getJSON("http://choct155.cartodb.com/api/v2/sql?q=SELECT cartodb_id, labels, ST_AsGeoJSON(ST_Simplify(the_geom,.01)) as geometry FROM dcdem_by_area",function(data){
+					//Add neighborhood highlighting capability
+					layer.on('featureOver',function(e,pos,latlng,data){
+						console.log(data)
+						$('.leaflet-container').css('cursor','pointer')
+						if (data.cartodb_id != polygon.cartodb_id){
+							drawHoverPolygon(data);
+							}
+						});
+					layer.on('featureOut',function(e,pos,latlng,data){
+						//...
+						$('.leaflet-container').css('cursor','pointer')
+							removePolygon(data);
+						});
+					});
+			
+				})
+			//If it doesn't, inspect the object
+			.on('error',function(){
+					console.log(cartodb);
+				});
+	
+	//console.log(map)
+	//Define polygon
+	var polygon = {};
+
+	//Define polygon aesthetic
+	var polygon_style={
+		color:'white',
+		weight:2,
+		opacity:1,
+		fillOpacity:.45,
+		fillColor:'white',
+		clickable:false
+		};
+
+	//Create functions to draw and remove polygon highlights
+	function drawHoverPolygon(data){
+		removePolygon();
+			//console.log(data)
+		polygon = new L.GeoJSON(JSON.parse(data.geometry),{
+			style:polygon_style
+			}).addTo(map);
+		polygon.cartodb_id=data.cartodb_id;
+		};
+
+	function removePolygon(){
+		map.removeLayer(polygon)
+		polygon.cartodb_id=null;
+
+		};
+	}
+
+
+  </script>
+</head>
+<body onload="init()">
+  <div id='cartodb-map'></div>
+</body>
+</html>

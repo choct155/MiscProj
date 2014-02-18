@@ -1,0 +1,57 @@
+<html>
+<head>
+  <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v2/themes/css/cartodb.ie.css" />
+  <![endif]-->
+  <style>
+    html, body {width:100%; height:100%; padding: 0; margin: 0;}
+    #cartodb-map { width: 100%; height:100%; background: black;}
+  </style>
+
+  <script>
+    var map;
+    function init(){
+      // initiate leaflet map
+      map = new L.Map('cartodb-map', { 
+        center: [40,-70],
+        zoom: 4
+      })
+
+		//Add basemap
+		L.tileLayer('https://dnv9my2eseobd.cloudfront.net/v3/cartodb.map-4xtxp73f/{z}/{x}/{y}.png', {
+  					attribution: 'Mapbox <a href="http://mapbox.com/about/maps" target="_blank">Terms & Feedback</a>'
+			}).addTo(map);
+
+		//Add Viz (data) layer
+		var layerURL = 'http://choct155.cartodb.com/api/v2/viz/ac383c20-97f1-11e3-8fd7-0e49973114de/viz.json';
+
+		//Set layer options
+		var subLayerOptions = {
+			//Subset to US (we access the table directly for this query)
+			sql: "SELECT * FROM ne_10m_populated_places_simple where adm0_a3 = 'USA'",
+			//Define CSS properties
+			cartocss: "#ne_10m_populated_places_simple{marker-fill:#109DCD; marker-width:5; marker-line-color:white; marker-line-width: 0;}"
+		};
+
+		//Load the layer onto the map
+		cartodb.createLayer(map,layerURL)
+			.addTo(map)
+			//If it works
+			.on('done',function(layer){
+				//With a SQL call defined, we need to run the operation on the layer here (looks like a zero index and layers are held in a list)
+				layer.getSubLayer(0).set(subLayerOptions);
+				})
+			//If it doesn't, inspect the object
+			.on('error',function(){
+					console.log(cartodb);
+				});
+	
+		}
+  </script>
+</head>
+<body onload="init()">
+  <div id='cartodb-map'></div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--Edit the title of the page-->
+    <title>DC Age by Neighborhood</title>
+    <meta name="description" content="">
+    <meta name="author" content="Marvin Ward Jr.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.ie.css" />
+    <![endif]-->
+    <link rel="stylesheet" href="css/makeitresponsive.css">
+    <!--Switch between the different themes changing the stylesheet below - light-theme.css |dark-theme.css -->
+    <link rel="stylesheet" href="css/dark-theme.css">
+  </head>
+  <body>
+    
+    <div class="row">
+      <div class="col span2 empty"><p></p></div>
+      <div class="col span12 context subheader">
+        <!--Link to your personal website, your blog or your twitter account-->
+        <p>Map created by an <a href="https://twitter.com/choct155">analyst</a> in the <a href="http://cfo.dc.gov/page/office-revenue-analysis">DC Office of Revenue Analysis</a>.</p>
+      </div>
+      <div class="col span2 empty"><p></p></div>
+    </div>
+
+    <!--In the paragraph below give an introduction to your visualization-->
+    <div class="row">
+      <div class="col span2 empty"><p></p></div>
+      <div class="col span12">
+        <h1>Spatial View of Age Distribution in DC</h1>
+        <p>Siting decisions for DC residents vary dramatically by age.  A multi-panel display of population by age groups enables us to better understand the extent of this phenomenon, and implications for the tax base.  The colors indicate relative intensity of population within each age group.  Clicking on a given neighborhood will reveal a point estimate of the target population's count.</p>
+      </div>
+      <div class="col span2 empty"><p></p></div>
+    </div>
+    
+    <div class="row">
+      <div class="col span5 map" id="map1"></div>
+      <div class="col span5 map" id="map2"></div>
+      <div class="col span5 map" id="map3"></div>
+    </div>
+
+    <!--Copy and paste the "row" div below a second, third, or fourth time to create content blocks-->
+    <div class="row">
+      <div class="col span2 empty"><p></p></div>
+      <div class="col span12 titleBlock">
+        <h2>Broad Trends</h2>
+      </div>
+      <div class="col span2 empty"><p></p></div>
+    </div>
+    <div class="row">
+      <div class="col span2 empty"><p></p></div>
+      <div class="col span12">
+        <p>In general, the District is a young city.  As can be seen in the legends, the scale of youth populations across the city is much larger than other groups.  Furthermore, it is apparent that there are distinct gravity wells for each age group.  Residents under 18 are far more likely to reside in the Far South than anywhere else, while Senior residents (65+) reside disproportionately in the northwestern region of East Rock Creek.  In contrast, residents in their prime working years (18-64) are most heavily concentrated in the middle of the city.</p>
+      </div>
+      <div class="col span2 empty"><p></p></div>
+    </div>
+
+    <!--This is an example of a second content block-->
+    <div class="row">
+      <div class="col span2 empty"><p></p></div>
+      <div class="col span12 titleBlock">
+        <h3>Data Source</h3>
+      </div>
+      <div class="col span2 empty"><p></p></div>
+    </div>
+    <div class="row">
+      <div class="col span2 empty"><p></p></div>
+      <div class="col span12">
+        <p>These data have been collected from the 2008-2012 5-year sample of the <a href="https://www.census.gov/acs/www/">American Community Survey</a>. They were collected at the <a href="http://en.wikipedia.org/wiki/Census_block_group">Census block group</a> level and the constituent counts were aggregated to the "neighborhoods" displayed.  These neighborhoods were constructed to roughly align with the planning areas identified by the <a href="http://planning.dc.gov/DC/Planning">DC Office of Planning</a> in the <a href="http://planning.dc.gov/DC/Planning/Across+the+City/Comprehensive+Plan">comprehensive plan</a> .</p>
+      </div>
+      <div class="col span2 empty"><p></p></div>
+    </div>
+
+    <!--Play fair and keep the attributions. If you do so, we will love you even more. :)-->
+    <div class="row">
+      <div class="col span2 empty"><p></p></div>
+      <div class="col span12 context footer">
+        <p>Create your maps with ease using <a href="http://cartodb.com">CartoDB</a>.  This display employs <a href="http://en.wikipedia.org/wiki/HTML">HTML</a> and <a href="http://developers.cartodb.com/documentation/cartodb-js.html">CartoDB.js</a> adapted from excellent <a href="http://developers.cartodb.com/">templates</a> provided by CartoDB.</p></p>
+      </div>
+      <div class="col span2 empty"><p></p></div>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&v=3.8"></script>
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+    <!--Change the URL's below in order to change the maps that are being shown.
+        map1 is the one on the left side and map2 is the one on the right side.
+        Go to your map view in CartoDB, click on share, and copy the URL under the API section
+        Check the cartodb.js documentation for more info
+        http://developers.cartodb.com/documentation/cartodb-js.html-->
+    <script type="text/javascript">
+      var map1,map2,map3;
+
+      cartodb.createVis('map1', 'http://choct155.cartodb.com/api/v2/viz/d83ce314-9857-11e3-ac41-0e49973114de/viz.json')
+      .done(function(vis, layers) {
+        map1 = vis.mapView.map;
+        cartodb.createVis('map2', 'http://choct155.cartodb.com/api/v2/viz/3e91269e-9857-11e3-8fa8-0edd25b1ac90/viz.json')
+        .done(function(vis, layers) {
+            map2 = vis.mapView.map;
+				cartodb.createVis('map3', 'http://choct155.cartodb.com/api/v2/viz/e8177ea4-9855-11e3-a305-0edd25b1ac90/viz.json')
+				.done(function(vis, layers) {
+					map3 = vis.mapView.map;
+		         map1.on('change:zoom change:center', function(e) {
+		           changeMapState(map1, map2);
+		         });
+					map1.on('change:zoom change:center', function(e) {
+		           changeMapState(map1, map3);
+		         });
+		         map2.on('change:zoom change:center', function(e) {
+		           changeMapState(map2, map1);
+		         });
+					map2.on('change:zoom change:center', function(e) {
+		           changeMapState(map2, map3);
+		         });
+					map3.on('change:zoom change:center', function(e) {
+		           changeMapState(map3, map1);
+		         });
+					map3.on('change:zoom change:center', function(e) {
+		           changeMapState(map3, map2);
+		         });
+			 })
+        })
+      })
+
+      //Applies the same view from src to tgt map
+      function changeMapState(src,tgt){
+        tgt.set({
+            'center': src.get('center'),
+            'zoom': src.get('zoom')
+        });
+      }
+
+    </script>
+
+  </body>
+</html>

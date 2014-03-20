@@ -64,7 +64,7 @@
 						$('.leaflet-container').css('cursor','pointer')
 							removePolygon(data);
 						});
-					};
+					});
 			
 				})
 			//If it doesn't, inspect the object
